@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu@latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
@@ -21,8 +21,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /home/ubuntu/Devops-practice
-            git pull
-            sudo npm install
-            sudo npm build
-            sudo pm2 stop ./dist/index.js
-            sudo pm2 start ./dist/index.js
+            git pull origin main
+            npm install
+            npm run build
+            pm2 restart next-app || pm2 start ./dist/index.js --name "next-app"
