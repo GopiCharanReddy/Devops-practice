@@ -23,7 +23,7 @@ jobs:
           script: |
             cd /home/ubuntu/Devops-practice
             git stash
-            git pull origin main
+            git pull origin master
             npm install
             npm run build
             pm2 restart next-app || pm2 start npm --name "next-app" -- start
