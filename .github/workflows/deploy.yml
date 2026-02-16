@@ -21,7 +21,9 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /home/ubuntu/Devops-practice
+            git stash
             git pull origin main
             npm install
             npm run build
-            pm2 restart next-app || pm2 start ./dist/index.js --name "next-app"
+            pm2 restart next-app || pm2 start npm --name "next-app" -- start
+            pm2 save
