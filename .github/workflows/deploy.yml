@@ -21,6 +21,11 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
+            # Load NVM (Node Version Manager) for this session
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            # Add NVM to PATH just in case
+            export PATH=$PATH:$HOME/.nvm/versions/node/$(nvm version)/bin
             cd /home/ubuntu/Devops-practice
             git stash
             git pull origin master
